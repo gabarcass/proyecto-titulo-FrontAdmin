@@ -1,0 +1,28 @@
+<div class="form-body">
+
+<form [formGroup]="mensajeForm" (submit)="send()">
+<div class="form-group" > 
+    <label for="asunto">Asunto</label>
+    <input type="text" class="form-control" id="nombre" formControlName="asunto">
+  </div>
+  <div class="form-group">
+      <div class="form-check">
+        <label for="destinatarios">Destinatarios</label>
+        <select id="destinatarios" class="form-control" formControlName="destinatarios">
+            <option value=""></option>
+            <option>Parvularios</option>
+            <option>Apoderados</option>
+          </select>
+      </div>
+    </div>
+  <div class="form-group">
+    <div class="form-group">
+      <label for="mensaje">Mensaje</label>
+      <textarea type="text" id="form7" rows="10" cols="40" class="md-textarea md-textarea-auto form-control" mdbInput formControlName="mensaje" ></textarea>
+    </div> 
+    
+  </div>
+  <button type="submit" class="btn btn-outline-dark">Enviar</button>
+
+</form>
+</div>

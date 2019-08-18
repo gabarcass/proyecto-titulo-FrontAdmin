@@ -1,0 +1,87 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Fotografia</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Dirección</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let dato of lista">
+      <td><img id='foto' src={{dato.fotografia}}></td>
+      <td (click)="open(content,'edit',dato)">{{ dato.nombre }}</td>
+      <td>{{ dato.direccion }}</td>
+      <td><img id='borrar' src="../../assets/borrar.png" (click)="borrar(dato)"></td>
+    </tr>
+  </tbody>
+</table>
+
+<button class="btn btn-lg btn-outline-primary" (click)="open(content,'nuevo')">Nuevo Parvulo</button>
+
+
+<!– --------------------MODAL INGRESO PARVULO------------------- ->
+  <ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">{{this.titulo}}</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="parvuloForm" (submit)="send()">
+        <div class="form-group">
+          <label for="nombre">Nombre:</label>
+          <input type="text" class="form-control" id="nombre" formControlName="nombre">
+        </div>
+        <div class="form-group">
+          <label for="rut">Rut:</label>
+          <input [readonly]="this.tipo=='edit'" type="text" class="form-control" id="rut" formControlName="rut">
+        </div>
+        <div class="form-group">
+          <label for="direccion">Dirección:</label>
+          <input type="text" class="form-control" id="direccion" formControlName="direccion">
+        </div>
+        <div class="form-group">
+          <div class="form-check">
+            <label>Apoderado 1:</label>
+            <select id="apoderado1" class="form-control" value={{apo.nombre} formControlName="apoderado1">
+          <option value=""></option>  
+          <option *ngFor="let apo of listaApo" >{{apo.nombre}}</option> </select> </div> </div> <div
+              class="form-group">
+              <div class="form-check">
+                <label>Apoderado 2:</label>
+                <select id="apoderado2" class="form-control" formControlName="apoderado2">
+                  <option value=""></option>
+                  <option *ngFor="let apo of listaApo">{{apo.nombre}}</option>
+                </select>
+              </div>
+          </div>
+          <div class="custom-file">
+            <input type="file" class="custom-file-input" id="fotografia"
+              (change)="this.archivoSrv.choseefile($event,'Parvulos',1)" lang="es">
+            <label class="custom-file-label" for="customFileLang">Fotografia:</label>
+          </div>
+          <div class="custom-file">
+            <input type="file" class="custom-file-input" id="nacimiento"
+              (change)="this.archivoSrv.choseefile($event,'Parvulos',2)" lang="es">
+            <label class="custom-file-label" for="customFileLang">Certificado nacimiento:</label>
+          </div>
+          <div class="custom-file">
+            <input type="file" class="custom-file-input" id="vacunas"
+              (change)="this.archivoSrv.choseefile($event,'Parvulos',3)" lang="es">
+            <label class="custom-file-label" for="customFileLang">Certificado vacunas:</label>
+          </div>
+          <div class="custom-file">
+            <input type="file" class="custom-file-input" id="pediatra"
+              (change)="this.archivoSrv.choseefile($event,'Parvulos',4)" lang="es">
+            <label class="custom-file-label" for="customFileLang">Certificado pediatra:</label>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-dark" (click)="c('cancel click')">Cancelar</button>
+            <button type="submit" class="btn btn-outline-dark">Guardar</button>
+
+          </div>
+      </form>
+    </div>
+
+  </ng-template>

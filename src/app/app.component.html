@@ -1,0 +1,12 @@
+<app-top-bar></app-top-bar>
+<div class="row">
+    <div class="col-2" *ngIf="authService.getSession()">
+        <app-main-menu></app-main-menu>
+    </div>
+    <div [ngClass]="{ 'col-10':  authService.getSession(), 'col-12': !authService.getSession()}">
+      <div class="container">
+          <router-outlet></router-outlet>
+      </div>
+    </div>
+</div>
+
